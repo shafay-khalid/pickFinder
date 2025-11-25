@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base-200 to-base-300 flex items-center justify-center p-6">
+    <div className="min-h-screen from-base-200 to-base-300 flex items-center justify-center p-6">
       <div className="max-w-3xl w-full mx-auto text-center p-12 rounded-2xl shadow-2xl bg-base-100 border border-base-300 space-y-6">
         <h1 className="text-5xl font-extrabold tracking-tight">
           Premium React Boilerplate ✨
