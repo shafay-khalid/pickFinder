@@ -1,16 +1,19 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router";
+// import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Sports", href: "#" },
-    { name: "Pricing", href: "#" },
-    { name: "Success", href: "#" },
-    { name: "Discord", href: "#" },
+    { name: "Home", href: "/" },
+    { name: "Sports", href: "/sports" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "Success", href: "/success" },
+    { name: "Discord", href: "/discord" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const menuVariants = {
@@ -29,47 +32,45 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-[#050B1A] text-white">
-      <div className="max-w-7xl px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <div className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-xl font-bold">
+    <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-[1100px] px-4">
+      <nav className="mx-auto bg-[#071025]/70 backdrop-blur-sm border border-white/6 rounded-full px-4 md:px-6 py-2 flex items-center justify-between gap-4 shadow-lg">
+        {/* left: logo */}
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
             EP
           </div>
         </div>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-8">
+        {/* center: links */}
+        <ul className="hidden md:flex items-center gap-6 text-sm text-slate-200">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-gray-300 hover:text-white transition"
-            >
-              {link.name}
-            </a>
+            <li key={link.name}>
+              <Link to={link.href} className="hover:text-white transition">
+                {link.name}
+              </Link>
+            </li>
           ))}
+        </ul>
 
-          <div className="flex items-center space-x-2 text-green-400">
-            <span>🎁</span>
-            <span>$2K BONUS</span>
+        {/* right: bonus + sign in */}
+        <div className="flex items-center gap-3">
+          <div className="hidden md:inline-flex items-center text-sm text-emerald-400 font-semibold px-3">
+            🎁 <span className="ml-2 text-emerald-400">$2K BONUS</span>
           </div>
 
-          <div className="flex items-center space-x-2 text-gray-300">
-            <span>📩</span>
-            <span>Contact</span>
-          </div>
-
-          <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full font-medium transition">
+          <Link
+            to="/signin"
+            className="ml-2 inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-400 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-md hover:opacity-95 transition"
+          >
             Sign in →
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
         <button className="md:hidden" onClick={() => setOpen(!open)}>
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
-      </div>
+      </nav>
 
       {/* Mobile Dropdown */}
       <AnimatePresence>
@@ -111,6 +112,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 }
